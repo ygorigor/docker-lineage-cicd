@@ -81,8 +81,7 @@ do_cleanup() {
       rm -rf ./* || true
     else
       cd "$source_dir"
-      echo ">> [$(date)] Removing $PWD/out" | tee -a "$DEBUG_LOG"
-      rm -rf out || true
+      (set +eu ; mka "${jobs_arg[@]}" clean) &>> "$DEBUG_LOG"
       echo ">> [$(date)] Removing $PWD/vendor" | tee -a "$DEBUG_LOG"
       rm -rf vendor/* || true
       echo ">> [$(date)] Removing $PWD/.repo/local_manifests/roomservice.xml" | tee -a "$DEBUG_LOG"

@@ -170,7 +170,7 @@ if [ -n "$branch" ] && [ -n "$devices" ]; then
       android_version="14"
       ;;
     lineage-22.1*)
-      themuppets_branch="lineage-22.1"
+      themuppets_branch="lineage-22.2"
       android_version="15"
       ;;
     *)

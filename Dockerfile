@@ -147,6 +147,7 @@ ENV CALL_MKA=true
 ENV ZIP_UP_IMAGES=false
 ENV MAKE_IMG_ZIP_FILE=false
 ENV APPLY_PI_PATCH=true
+ENV APPLY_LP_PATCH=false
 
 # You can optionally specify a USERSCRIPTS_DIR volume containing these scripts:
 #  * begin.sh, run at the very beginning

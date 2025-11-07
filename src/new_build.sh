@@ -434,6 +434,21 @@ for codename in ${devices//,/ }; do
       echo ">> [$(date)] Applying PlayIntegrity patch disabled" | tee -a "$repo_log"
     fi
 
+    # Apply the LineageParts patch if the APPLY_LP_PATCH is set
+    if [ "$APPLY_LP_PATCH" = true ]; then
+      echo ">> [$(date)] Applying the LineageParts patch for $codename" >> "$DEBUG_LOG"
+      cd packages/apps/LineageParts
+
+      git reset --hard
+      git clean -q -fd
+      wget -q https://github.com/ygorigor/Patches/raw/refs/heads/master/0001-LineageParts.patch
+      git apply --whitespace=nowarn 0001-LineageParts.patch &>> "$DEBUG_LOG" || {
+        echo ">> [$(date)] Error: Applying the LineageParts patch failed for $codename on $branch!"; userscriptfail=true; continue; }
+      cd ../../..
+    else
+      echo ">> [$(date)] Applying LineageParts patch disabled" | tee -a "$repo_log"
+    fi
+
     # Call pre-build.sh
     if [ -f /root/userscripts/pre-build.sh ]; then
       echo ">> [$(date)] Running pre-build.sh for $codename" >> "$DEBUG_LOG"
